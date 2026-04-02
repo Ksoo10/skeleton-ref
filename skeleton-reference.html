@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSS Skeleton Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Unbounded:wght@200..900&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       ROOT: DESIGN TOKENS
+    ============================================= */
+    :root {
+      --clr-primary:   rgb(255, 90, 54);
+      --clr-secondary: rgb(30, 41, 59);
+      --clr-accent:    rgba(245, 240, 231);
+      --clr-grey:      rgb(142, 141, 143);
+      --clr-white:     #ffffff;
+
+      --ff-primary: "Unbounded", sans-serif;
+      --ff-header:  "Geist", sans-serif;
+
+      --fw-norm:  400;
+      --fw-bold:  700;
+      --fw-vbold: 900;
+
+      --fs-small:  1rem;
+      --fs-medium: 1.25rem;
+      --fs-large:  2rem;
+      --fs-xlarge: 3rem;
+    }
+
+    /* =============================================
+       RESET
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+    * { padding: 0; margin: 0; }
+    html, body { height: 100%; interpolate-size: allow-keywords; }
+    ul[role="list"], ol[role="list"] { list-style: none; }
+    html:focus-within { scroll-behavior: smooth; }
+    body { min-height: 100vh; text-rendering: optimizeSpeed; line-height: 1.5; }
+    img, picture, svg { max-width: 100%; display: block; height: auto; }
+    input, button, textarea, select { font: inherit; }
+
+    /* =============================================
+       BASE ELEMENT STYLES
+    ============================================= */
+    p {
+      margin-bottom: 0.75rem;
+      font-size: 16px;
+      font-weight: 400;
+      font-family: var(--ff-primary);
+      color: var(--clr-secondary);
+    }
+    @media (max-width: 768px) {
+      p { font-size: 14px; padding: 1rem 0; text-align: center; }
+    }
+
+    ul  { list-style: none; }
+    a   { text-decoration: none; }
+    li  { list-style: none; padding: 0 0.5rem; margin-bottom: 1rem; }
+
+    section { margin: 0 auto; padding: 2rem 1rem; }
+
+    :is(h1, h2, h3, h4, h5, h6) {
+      font-family: var(--ff-header);
+      line-height: 1.2;
+    }
+
+    hr {
+      width: 33.333%;
+      margin-top: 0.5rem;
+      border: 0.25rem solid var(--clr-primary);
+    }
+    @media (max-width: 768px) {
+      hr { width: 66.666%; }
+    }
+
+    /* =============================================
+       UTILITY: COLOR
+    ============================================= */
+    .tc-white { color: #ffffff; }
+    .tc-prim  { color: var(--clr-primary); }
+    .tc-sec   { color: var(--clr-secondary); }
+    .tc-acc   { color: var(--clr-accent); }
+    .tc-grey  { color: var(--clr-grey); }
+
+    .bg-primary   { background-color: var(--clr-primary); }
+    .bg-secondary { background-color: var(--clr-secondary); }
+    .bg-accent    { background-color: var(--clr-accent); }
+
+    /* =============================================
+       UTILITY: FONT
+    ============================================= */
+    .fw-norm  { font-weight: var(--fw-norm); }
+    .fw-bold  { font-weight: var(--fw-bold); }
+    .fw-vbold { font-weight: var(--fw-vbold); }
+
+    .fs-small  { font-size: var(--fs-small); }
+    .fs-medium { font-size: var(--fs-medium); }
+    .fs-large  { font-size: var(--fs-large); }
+    .fs-xlarge { font-size: var(--fs-xlarge); }
+
+    .center { text-align: center; }
+
+    /* =============================================
+       UTILITY: FLEXBOX
+    ============================================= */
+    .flex              { display: flex; }
+    .flex-col          { flex-direction: column; }
+    .flex-row          { flex-direction: row; }
+    .flex-col-reverse  { flex-direction: column-reverse; }
+    .flex-wrap         { flex-wrap: wrap; }
+
+    .items-start    { align-items: flex-start; }
+    .items-end      { align-items: flex-end; }
+    .items-center   { align-items: center; }
+    .items-baseline { align-items: baseline; }
+    .items-stretch  { align-items: stretch; }
+
+    .justify-start   { justify-content: flex-start; }
+    .justify-end     { justify-content: flex-end; }
+    .justify-center  { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+
+    .gap-1  { gap: 0.25rem; }
+    .gap-2  { gap: 0.5rem; }
+    .gap-3  { gap: 0.75rem; }
+    .gap-4  { gap: 1rem; }
+    .gap-5  { gap: 1.25rem; }
+    .gap-6  { gap: 1.5rem; }
+    .gap-8  { gap: 2rem; }
+    .gap-10 { gap: 2.5rem; }
+    .gap-16 { gap: 4rem; }
+
+    /* =============================================
+       UTILITY: MARGIN & PADDING
+    ============================================= */
+    .mx-0  { margin: 0 auto; }
+    .mx-00 { margin: 0; }
+
+    .mt-1 { margin-top: 0.25rem; }
+    .mt-2 { margin-top: 2.5rem; }
+    .mt-4 { margin-top: 4rem; }
+
+    .mb-1 { margin-bottom: 0.25rem; }
+    .mb-2 { margin-bottom: 2.5rem; }
+    .mb-4 { margin-bottom: 4rem; }
+
+    .pt-1 { padding-top: 0.25rem; }
+    .pt-2 { padding-top: 2.5rem; }
+    .pt-4 { padding-top: 4rem; }
+
+    .pb-1 { padding-bottom: 0.25rem; }
+    .pb-2 { padding-bottom: 2.5rem; }
+    .pb-4 { padding-bottom: 4rem; }
+
+    .px-0 { padding: 0; }
+
+    /* =============================================
+       UTILITY: WIDTHS
+    ============================================= */
+    .block-650 { max-width: 650px; }
+    .block-350 { max-width: 350px; }
+
+    /* =============================================
+       LAYOUT: WRAPPER / CONTAINER / BLOCK
+    ============================================= */
+    .standard-block {
+      margin-top: 0.75rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .wrapper {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 768px) {
+      .wrapper { display: flex; flex-direction: column; align-items: center; }
+    }
+
+    .text-wrapper { margin: 0 auto; padding: 0.5rem; }
+
+    .container { margin-left: auto; margin-right: auto; }
+
+    /* =============================================
+       COMPONENT: NAVIGATION  — nav.menu
+    ============================================= */
+    nav.menu {
+      background-color: var(--clr-white);
+    }
+    nav.menu ul > li { padding-top: 1rem; }
+    nav.menu ul > li > a {
+      color: var(--clr-primary);
+      font-size: 1.25rem;
+      padding: 1rem;
+      font-weight: 700;
+    }
+    nav.menu ul > li > a:hover { color: var(--clr-secondary); cursor: pointer; }
+
+    /* =============================================
+       COMPONENT: CARD  — .card-item
+    ============================================= */
+    .card-item {
+      border: 1px solid var(--clr-accent);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 9px -4.5px 5.5px -6px #000000;
+      background-color: #fff;
+      max-width: 400px;
+    }
+    .card-item .card-title {
+      font-family: var(--ff-header);
+      font-weight: var(--fw-vbold);
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--clr-primary);
+    }
+    .card-item .card-text {
+      font-family: var(--ff-primary);
+      font-weight: var(--fw-norm);
+      font-size: 0.75rem;
+      color: var(--clr-secondary);
+      margin-bottom: 0.75rem;
+    }
+
+    /* =============================================
+       COMPONENT: BUTTONS  — .primary-btn / .secondary-btn
+    ============================================= */
+    .primary-btn {
+      border: 0;
+      border-radius: 20px;
+      background: var(--clr-primary);
+      color: white;
+      font-family: var(--ff-header);
+      font-size: 1rem;
+      line-height: 1.2;
+      white-space: nowrap;
+      box-shadow: 9px 4.5px 5.5px -6px #000000;
+      text-decoration: none;
+      padding: 1rem 0.75rem;
+      margin: 0.25rem;
+      cursor: pointer;
+    }
+    .primary-btn:hover { background-color: var(--clr-secondary); }
+
+    .secondary-btn {
+      border: 0;
+      border-radius: 20px;
+      background: var(--clr-secondary);
+      color: white;
+      font-family: var(--ff-header);
+      font-size: 1rem;
+      line-height: 1.2;
+      white-space: nowrap;
+      box-shadow: 9px 4.5px 5.5px -6px #000000;
+      text-decoration: none;
+      padding: 1rem 0.75rem;
+      margin: 0.25rem;
+      cursor: pointer;
+    }
+    .secondary-btn:hover { background-color: var(--clr-primary); }
+
+    /* =============================================
+       COMPONENT: ACCORDION  — .details-wrapper
+    ============================================= */
+    .details-wrapper {
+      margin: 0 auto;
+      border-radius: 16px;
+      padding: 1rem;
+      background: #ffffff;
+    }
+    .details-wrapper .detail-title-section {
+      padding: 1rem;
+      background: var(--clr-secondary);
+      margin-bottom: 1rem;
+      border-radius: 8px;
+    }
+    .details-wrapper h3 { color: #ffffff; }
+    .details-wrapper details {
+      font-family: var(--ff-header);
+      padding: 10px;
+      background-color: #e4eaef;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+    .details-wrapper summary {
+      list-style-position: outside;
+      margin-left: 30px;
+      padding: 10px 10px 10px 20px;
+      border-radius: 5px;
+    }
+    .details-wrapper details[open] {
+      background: oklch(95% 0.1812 38.35);
+      display: inline-block;
+    }
+
+    /* =============================================
+       COMPONENT: FORM  — form.form-wrapper
+    ============================================= */
+    form.form-wrapper {
+      max-width: 650px;
+      padding: 1rem;
+    }
+
+    /* =============================================
+       COMPONENT: IMAGE HELPER
+    ============================================= */
+    .img-border-rounded { border-radius: 16px; }
+
+    /* ============================================
+       REFERENCE PAGE STYLES (not part of skeleton)
+    ============================================= */
+    body {
+      background-color: var(--clr-accent);
+      font-family: var(--ff-primary);
+      color: var(--clr-secondary);
+    }
+
+    .ref-page { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+    .ref-hero {
+      background-color: var(--clr-secondary);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      margin-bottom: 3rem;
+    }
+    .ref-hero h1 {
+      font-family: var(--ff-header);
+      font-size: var(--fs-xlarge);
+      color: var(--clr-white);
+      margin-bottom: 0.5rem;
+    }
+    .ref-hero p {
+      font-size: var(--fs-small);
+      color: var(--clr-grey);
+      margin-bottom: 0;
+    }
+
+    .ref-section {
+      margin-bottom: 3rem;
+    }
+    .ref-section-title {
+      font-family: var(--ff-header);
+      font-size: var(--fs-medium);
+      font-weight: var(--fw-vbold);
+      color: var(--clr-primary);
+      border-bottom: 3px solid var(--clr-primary);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ref-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .ref-chip {
+      background: var(--clr-white);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-family: var(--ff-header);
+      font-size: 0.8rem;
+      color: var(--clr-secondary);
+      box-shadow: 2px 2px 0px var(--clr-secondary);
+    }
+    .ref-chip code {
+      color: var(--clr-primary);
+      font-weight: var(--fw-bold);
+    }
+
+    .swatch-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .swatch {
+      width: 120px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.12);
+    }
+    .swatch-color { height: 60px; }
+    .swatch-label {
+      background: var(--clr-white);
+      padding: 0.4rem 0.5rem;
+      font-family: var(--ff-header);
+      font-size: 0.7rem;
+      color: var(--clr-secondary);
+    }
+    .swatch-label span { display: block; color: var(--clr-grey); font-size: 0.6rem; }
+
+    .type-row {
+      background: var(--clr-white);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .type-label {
+      font-family: var(--ff-header);
+      font-size: 0.7rem;
+      color: var(--clr-grey);
+      min-width: 120px;
+      flex-shrink: 0;
+    }
+
+    .skeleton-demo-card {
+      background: var(--clr-white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      max-width: 400px;
+    }
+
+    .ref-code-block {
+      background: var(--clr-secondary);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      overflow-x: auto;
+    }
+    .ref-code-block pre {
+      font-family: "Geist", monospace;
+      font-size: 0.78rem;
+      color: #e2e8f0;
+      line-height: 1.7;
+      margin: 0;
+      white-space: pre;
+    }
+    .ref-code-block .token-var    { color: rgb(255, 90, 54); }
+    .ref-code-block .token-prop   { color: #93c5fd; }
+    .ref-code-block .token-val    { color: #bbf7d0; }
+    .ref-code-block .token-sel    { color: #fde68a; }
+    .ref-code-block .token-com    { color: #6b7280; font-style: italic; }
+
+    .component-demo {
+      background: var(--clr-white);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .component-label {
+      font-family: var(--ff-header);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--clr-grey);
+      margin-bottom: 1rem;
+    }
+
+    .nav-demo {
+      background: var(--clr-white);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      border: 1px solid rgba(30,41,59,0.1);
+    }
+    .nav-demo a {
+      color: var(--clr-primary);
+      font-size: 1rem;
+      padding: 0.5rem 0.75rem;
+      font-family: var(--ff-header);
+      font-weight: 700;
+      border-radius: 4px;
+    }
+    .nav-demo a:hover { color: var(--clr-secondary); }
+
+    .form-demo label {
+      display: block;
+      font-family: var(--ff-header);
+      font-size: 0.85rem;
+      font-weight: var(--fw-bold);
+      color: var(--clr-secondary);
+      margin-bottom: 0.35rem;
+    }
+    .form-demo input,
+    .form-demo textarea,
+    .form-demo select {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid rgba(30,41,59,0.2);
+      border-radius: 8px;
+      font-family: var(--ff-primary);
+      font-size: 0.9rem;
+      color: var(--clr-secondary);
+      margin-bottom: 1rem;
+      background: white;
+    }
+    .form-demo input:focus,
+    .form-demo textarea:focus {
+      outline: 2px solid var(--clr-primary);
+      outline-offset: 2px;
+    }
+
+    .util-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--ff-header);
+      font-size: 0.8rem;
+    }
+    .util-table thead th {
+      background: var(--clr-secondary);
+      color: white;
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+      font-weight: var(--fw-bold);
+    }
+    .util-table tbody tr { background: var(--clr-white); }
+    .util-table tbody tr:nth-child(even) { background: rgba(245,240,231,0.7); }
+    .util-table tbody td { padding: 0.55rem 0.85rem; color: var(--clr-secondary); }
+    .util-table tbody td:first-child { color: var(--clr-primary); font-weight: var(--fw-bold); }
+
+    .tag { 
+      display: inline-block;
+      background: var(--clr-primary);
+      color: white;
+      font-family: var(--ff-header);
+      font-size: 0.65rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 20px;
+      font-weight: var(--fw-bold);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: var(--clr-primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ff-header);
+      text-decoration: none;
+    }
+    .back-to-top:hover { background: var(--clr-secondary); }
+
+    /* TOC */
+    .toc {
+      background: var(--clr-white);
+      border-left: 4px solid var(--clr-primary);
+      border-radius: 0 12px 12px 0;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .toc h2 {
+      font-family: var(--ff-header);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--clr-grey);
+      margin-bottom: 0.75rem;
+    }
+    .toc ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .toc ul li { padding: 0; margin: 0; }
+    .toc ul li a {
+      font-family: var(--ff-header);
+      font-size: 0.8rem;
+      font-weight: var(--fw-bold);
+      color: var(--clr-secondary);
+      background: var(--clr-accent);
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      display: block;
+    }
+    .toc ul li a:hover { background: var(--clr-primary); color: white; }
+  </style>
+</head>
+<body>
+
+<div class="ref-page">
+
+  <!-- HERO -->
+  <div class="ref-hero" id="top">
+    <h1>CSS Skeleton Reference</h1>
+    <p>Quick-reference for all tokens, utilities, and components from your style.css — built to match your exact structure.</p>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <nav class="toc">
+    <h2>Jump to Section</h2>
+    <ul>
+      <li><a href="#tokens">Design Tokens</a></li>
+      <li><a href="#colors">Colors</a></li>
+      <li><a href="#typography">Typography</a></li>
+      <li><a href="#flex">Flexbox</a></li>
+      <li><a href="#spacing">Spacing</a></li>
+      <li><a href="#widths">Widths</a></li>
+      <li><a href="#layout">Layout / Wrappers</a></li>
+      <li><a href="#nav">Navigation</a></li>
+      <li><a href="#cards">Cards</a></li>
+      <li><a href="#buttons">Buttons</a></li>
+      <li><a href="#accordion">Accordion</a></li>
+      <li><a href="#forms">Forms</a></li>
+      <li><a href="#misc">Misc Helpers</a></li>
+    </ul>
+  </nav>
+
+  <!-- ====================== DESIGN TOKENS ====================== -->
+  <section class="ref-section" id="tokens">
+    <div class="ref-section-title">Design Tokens — :root</div>
+    <div class="ref-code-block">
+      <pre><span class="token-sel">:root</span> {
+  <span class="token-com">/* Colors */</span>
+  <span class="token-prop">--clr-primary</span>:   <span class="token-val">rgb(255, 90, 54)</span>;
+  <span class="token-prop">--clr-secondary</span>: <span class="token-val">rgb(30, 41, 59)</span>;
+  <span class="token-prop">--clr-accent</span>:    <span class="token-val">rgba(245, 240, 231)</span>;
+  <span class="token-prop">--clr-grey</span>:      <span class="token-val">rgb(142, 141, 143)</span>;
+  <span class="token-prop">--clr-white</span>:     <span class="token-val">#ffffff</span>;
+
+  <span class="token-com">/* Font Families */</span>
+  <span class="token-prop">--ff-primary</span>: <span class="token-val">"Unbounded", sans-serif</span>;   <span class="token-com">/* body text */</span>
+  <span class="token-prop">--ff-header</span>:  <span class="token-val">"Geist", sans-serif</span>;        <span class="token-com">/* headings, UI chrome */</span>
+
+  <span class="token-com">/* Font Weights */</span>
+  <span class="token-prop">--fw-norm</span>:  <span class="token-val">400</span>;
+  <span class="token-prop">--fw-bold</span>:  <span class="token-val">700</span>;
+  <span class="token-prop">--fw-vbold</span>: <span class="token-val">900</span>;
+
+  <span class="token-com">/* Font Sizes */</span>
+  <span class="token-prop">--fs-small</span>:  <span class="token-val">1rem</span>;      <span class="token-com">/* 16px */</span>
+  <span class="token-prop">--fs-medium</span>: <span class="token-val">1.25rem</span>;   <span class="token-com">/* 20px */</span>
+  <span class="token-prop">--fs-large</span>:  <span class="token-val">2rem</span>;      <span class="token-com">/* 32px */</span>
+  <span class="token-prop">--fs-xlarge</span>: <span class="token-val">3rem</span>;      <span class="token-com">/* 48px */</span>
+}</pre>
+    </div>
+  </section>
+
+  <!-- ====================== COLORS ====================== -->
+  <section class="ref-section" id="colors">
+    <div class="ref-section-title">Colors</div>
+    <div class="swatch-grid" style="margin-bottom:1.5rem;">
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgb(255,90,54);"></div>
+        <div class="swatch-label">Primary<span>rgb(255, 90, 54)</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgb(30,41,59);"></div>
+        <div class="swatch-label">Secondary<span>rgb(30, 41, 59)</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgba(245,240,231,1); border: 1px solid #ddd;"></div>
+        <div class="swatch-label">Accent<span>rgba(245, 240, 231)</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgb(142,141,143);"></div>
+        <div class="swatch-label">Grey<span>rgb(142, 141, 143)</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#ffffff; border: 1px solid #ddd;"></div>
+        <div class="swatch-label">White<span>#ffffff</span></div>
+      </div>
+    </div>
+
+    <table class="util-table">
+      <thead>
+        <tr><th>Class</th><th>Property</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>.tc-white</td><td>color</td><td>#ffffff</td></tr>
+        <tr><td>.tc-prim</td><td>color</td><td>var(--clr-primary)</td></tr>
+        <tr><td>.tc-sec</td><td>color</td><td>var(--clr-secondary)</td></tr>
+        <tr><td>.tc-acc</td><td>color</td><td>var(--clr-accent)</td></tr>
+        <tr><td>.tc-grey</td><td>color</td><td>var(--clr-grey)</td></tr>
+        <tr><td>.bg-primary</td><td>background-color</td><td>var(--clr-primary)</td></tr>
+        <tr><td>.bg-secondary</td><td>background-color</td><td>var(--clr-secondary)</td></tr>
+        <tr><td>.bg-accent</td><td>background-color</td><td>var(--clr-accent)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ====================== TYPOGRAPHY ====================== -->
+  <section class="ref-section" id="typography">
+    <div class="ref-section-title">Typography</div>
+
+    <div style="margin-bottom: 1.5rem;">
+      <div class="type-row">
+        <span class="type-label">.fs-xlarge / h1<br><code style="color:var(--clr-grey);font-size:0.65rem;">3rem · 48px</code></span>
+        <span style="font-family:var(--ff-header);font-size:var(--fs-xlarge);font-weight:var(--fw-vbold);color:var(--clr-secondary);">Site Heading</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">.fs-large / h2<br><code style="color:var(--clr-grey);font-size:0.65rem;">2rem · 32px</code></span>
+        <span style="font-family:var(--ff-header);font-size:var(--fs-large);font-weight:var(--fw-bold);color:var(--clr-secondary);">Section Title</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">.fs-medium / h3<br><code style="color:var(--clr-grey);font-size:0.65rem;">1.25rem · 20px</code></span>
+        <span style="font-family:var(--ff-header);font-size:var(--fs-medium);font-weight:var(--fw-bold);color:var(--clr-secondary);">Sub-heading</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">.fs-small / p<br><code style="color:var(--clr-grey);font-size:0.65rem;">1rem · 16px</code></span>
+        <span style="font-family:var(--ff-primary);font-size:var(--fs-small);font-weight:var(--fw-norm);color:var(--clr-secondary);">Body copy — Unbounded regular</span>
+      </div>
+    </div>
+
+    <table class="util-table">
+      <thead><tr><th>Class</th><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>.fw-norm</td><td>font-weight</td><td>400</td></tr>
+        <tr><td>.fw-bold</td><td>font-weight</td><td>700</td></tr>
+        <tr><td>.fw-vbold</td><td>font-weight</td><td>900</td></tr>
+        <tr><td>.fs-small</td><td>font-size</td><td>1rem</td></tr>
+        <tr><td>.fs-medium</td><td>font-size</td><td>1.25rem</td></tr>
+        <tr><td>.fs-large</td><td>font-size</td><td>2rem</td></tr>
+        <tr><td>.fs-xlarge</td><td>font-size</td><td>3rem</td></tr>
+        <tr><td>.center</td><td>text-align</td><td>center</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ====================== FLEXBOX ====================== -->
+  <section class="ref-section" id="flex">
+    <div class="ref-section-title">Flexbox Utilities</div>
+    <table class="util-table">
+      <thead><tr><th>Class</th><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>.flex</td><td>display</td><td>flex</td></tr>
+        <tr><td>.flex-col</td><td>flex-direction</td><td>column</td></tr>
+        <tr><td>.flex-row</td><td>flex-direction</td><td>row</td></tr>
+        <tr><td>.flex-col-reverse</td><td>flex-direction</td><td>column-reverse</td></tr>
+        <tr><td>.flex-wrap</td><td>flex-wrap</td><td>wrap</td></tr>
+        <tr><td>.items-start</td><td>align-items</td><td>flex-start</td></tr>
+        <tr><td>.items-end</td><td>align-items</td><td>flex-end</td></tr>
+        <tr><td>.items-center</td><td>align-items</td><td>center</td></tr>
+        <tr><td>.items-baseline</td><td>align-items</td><td>baseline</td></tr>
+        <tr><td>.items-stretch</td><td>align-items</td><td>stretch</td></tr>
+        <tr><td>.justify-start</td><td>justify-content</td><td>flex-start</td></tr>
+        <tr><td>.justify-end</td><td>justify-content</td><td>flex-end</td></tr>
+        <tr><td>.justify-center</td><td>justify-content</td><td>center</td></tr>
+        <tr><td>.justify-between</td><td>justify-content</td><td>space-between</td></tr>
+        <tr><td>.gap-1</td><td>gap</td><td>0.25rem</td></tr>
+        <tr><td>.gap-2</td><td>gap</td><td>0.5rem</td></tr>
+        <tr><td>.gap-3</td><td>gap</td><td>0.75rem</td></tr>
+        <tr><td>.gap-4</td><td>gap</td><td>1rem</td></tr>
+        <tr><td>.gap-5</td><td>gap</td><td>1.25rem</td></tr>
+        <tr><td>.gap-6</td><td>gap</td><td>1.5rem</td></tr>
+        <tr><td>.gap-8</td><td>gap</td><td>2rem</td></tr>
+        <tr><td>.gap-10</td><td>gap</td><td>2.5rem</td></tr>
+        <tr><td>.gap-16</td><td>gap</td><td>4rem</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ====================== SPACING ====================== -->
+  <section class="ref-section" id="spacing">
+    <div class="ref-section-title">Margin &amp; Padding Utilities</div>
+    <table class="util-table">
+      <thead><tr><th>Class</th><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>.mx-0</td><td>margin</td><td>0 auto</td></tr>
+        <tr><td>.mx-00</td><td>margin</td><td>0</td></tr>
+        <tr><td>.mt-1</td><td>margin-top</td><td>0.25rem</td></tr>
+        <tr><td>.mt-2</td><td>margin-top</td><td>2.5rem</td></tr>
+        <tr><td>.mt-4</td><td>margin-top</td><td>4rem</td></tr>
+        <tr><td>.mb-1</td><td>margin-bottom</td><td>0.25rem</td></tr>
+        <tr><td>.mb-2</td><td>margin-bottom</td><td>2.5rem</td></tr>
+        <tr><td>.mb-4</td><td>margin-bottom</td><td>4rem</td></tr>
+        <tr><td>.pt-1</td><td>padding-top</td><td>0.25rem</td></tr>
+        <tr><td>.pt-2</td><td>padding-top</td><td>2.5rem</td></tr>
+        <tr><td>.pt-4</td><td>padding-top</td><td>4rem</td></tr>
+        <tr><td>.pb-1</td><td>padding-bottom</td><td>0.25rem</td></tr>
+        <tr><td>.pb-2</td><td>padding-bottom</td><td>2.5rem</td></tr>
+        <tr><td>.pb-4</td><td>padding-bottom</td><td>4rem</td></tr>
+        <tr><td>.px-0</td><td>padding</td><td>0</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ====================== WIDTHS ====================== -->
+  <section class="ref-section" id="widths">
+    <div class="ref-section-title">Width Utilities</div>
+    <table class="util-table">
+      <thead><tr><th>Class</th><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>.block-650</td><td>max-width</td><td>650px</td></tr>
+        <tr><td>.block-350</td><td>max-width</td><td>350px</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ====================== LAYOUT / WRAPPERS ====================== -->
+  <section class="ref-section" id="layout">
+    <div class="ref-section-title">Layout — Wrappers &amp; Containers</div>
+    <div class="ref-code-block" style="margin-bottom:1rem;">
+      <pre><span class="token-com">/* Center content horizontally with side margins */</span>
+<span class="token-sel">.standard-block</span> {
+  <span class="token-prop">margin</span>: <span class="token-val">0.75rem 1rem 1rem 1rem</span>;
+}
+
+<span class="token-com">/* Stacks vertically on mobile (&lt;768px) */</span>
+<span class="token-sel">.wrapper</span> {
+  <span class="token-prop">margin</span>: <span class="token-val">1rem 0</span>;
+}
+
+<span class="token-com">/* Centered text/content block */</span>
+<span class="token-sel">.text-wrapper</span> {
+  <span class="token-prop">margin</span>: <span class="token-val">0 auto</span>;
+  <span class="token-prop">padding</span>: <span class="token-val">0.5rem</span>;
+}
+
+<span class="token-com">/* Generic auto-centered container */</span>
+<span class="token-sel">.container</span> {
+  <span class="token-prop">margin-left</span>: <span class="token-val">auto</span>;
+  <span class="token-prop">margin-right</span>: <span class="token-val">auto</span>;
+}
+
+<span class="token-com">/* Section default */</span>
+<span class="token-sel">section</span> {
+  <span class="token-prop">margin</span>: <span class="token-val">0 auto</span>;
+  <span class="token-prop">padding</span>: <span class="token-val">2rem 1rem</span>;
+}</pre>
+    </div>
+    <p style="font-size:0.8rem; color:var(--clr-grey); margin-bottom:0;">Combine <code>.container</code> with a width utility like <code>.block-650</code> to constrain content width.</p>
+  </section>
+
+  <!-- ====================== NAVIGATION ====================== -->
+  <section class="ref-section" id="nav">
+    <div class="ref-section-title">Navigation — nav.menu</div>
+    <div class="component-demo">
+      <div class="component-label">Live Preview</div>
+      <nav class="menu">
+        <div class="nav-demo">
+          <a href="#">Home</a>
+          <a href="#">About</a>
+          <a href="#">Work</a>
+          <a href="#">Contact</a>
+        </div>
+      </nav>
+    </div>
+    <div class="ref-code-block">
+      <pre><span class="token-sel">nav.menu</span> {
+  <span class="token-prop">background-color</span>: <span class="token-var">var(--clr-white)</span>;
+}
+<span class="token-sel">nav.menu ul > li > a</span> {
+  <span class="token-prop">color</span>: <span class="token-var">var(--clr-primary)</span>;
+  <span class="token-prop">font-size</span>: <span class="token-val">1.25rem</span>;
+  <span class="token-prop">padding</span>: <span class="token-val">1rem</span>;
+  <span class="token-prop">font-weight</span>: <span class="token-val">700</span>;
+}
+<span class="token-sel">nav.menu ul > li > a:hover</span> {
+  <span class="token-prop">color</span>: <span class="token-var">var(--clr-secondary)</span>;
+}</pre>
+    </div>
+    <div class="ref-code-block" style="margin-top:0.75rem;">
+      <pre><span class="token-com">&lt;!-- HTML Skeleton --&gt;</span>
+&lt;<span class="token-sel">nav</span> class="menu"&gt;
+  &lt;<span class="token-sel">ul</span>&gt;
+    &lt;<span class="token-sel">li</span>&gt;&lt;<span class="token-sel">a</span> href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;<span class="token-sel">li</span>&gt;&lt;<span class="token-sel">a</span> href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;<span class="token-sel">li</span>&gt;&lt;<span class="token-sel">a</span> href="#"&gt;Work&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</pre>
+    </div>
+  </section>
+
+  <!-- ====================== CARDS ====================== -->
+  <section class="ref-section" id="cards">
+    <div class="ref-section-title">Card — .card-item</div>
+    <div class="component-demo">
+      <div class="component-label">Live Preview</div>
+      <div class="card-item">
+        <div class="card-title">Card Title Here</div>
+        <div class="card-text">Supporting description text goes here. Keeps it short and punchy for the best visual result on the card.</div>
+        <button class="primary-btn">Action</button>
+      </div>
+    </div>
+    <div class="ref-code-block">
+      <pre><span class="token-sel">.card-item</span> {
+  <span class="token-prop">border</span>: <span class="token-val">1px solid</span> <span class="token-var">var(--clr-accent)</span>;
+  <span class="token-prop">border-radius</span>: <span class="token-val">8px</span>;
+  <span class="token-prop">padding</span>: <span class="token-val">2rem</span>;
+  <span class="token-prop">box-shadow</span>: <span class="token-val">9px -4.5px 5.5px -6px #000</span>;
+  <span class="token-prop">background-color</span>: <span class="token-val">#fff</span>;
+  <span class="token-prop">max-width</span>: <span class="token-val">400px</span>;
+}
+<span class="token-sel">.card-title</span> {
+  <span class="token-prop">font-family</span>: <span class="token-var">var(--ff-header)</span>;
+  <span class="token-prop">font-weight</span>: <span class="token-var">var(--fw-vbold)</span>;
+  <span class="token-prop">font-size</span>: <span class="token-val">1.25rem</span>;
+  <span class="token-prop">color</span>: <span class="token-var">var(--clr-primary)</span>;
+}
+<span class="token-sel">.card-text</span> {
+  <span class="token-prop">font-size</span>: <span class="token-val">0.75rem</span>;
+  <span class="token-prop">color</span>: <span class="token-var">var(--clr-secondary)</span>;
+}</pre>
+    </div>
+    <div class="ref-code-block" style="margin-top:0.75rem;">
+      <pre><span class="token-com">&lt;!-- HTML Skeleton --&gt;</span>
+&lt;<span class="token-sel">div</span> class="card-item"&gt;
+  &lt;<span class="token-sel">div</span> class="card-title"&gt;Title&lt;/div&gt;
+  &lt;<span class="token-sel">div</span> class="card-text"&gt;Description text.&lt;/div&gt;
+  &lt;<span class="token-sel">button</span> class="primary-btn"&gt;CTA&lt;/button&gt;
+&lt;/div&gt;</pre>
+    </div>
+  </section>
+
+  <!-- ====================== BUTTONS ====================== -->
+  <section class="ref-section" id="buttons">
+    <div class="ref-section-title">Buttons</div>
+    <div class="component-demo">
+      <div class="component-label">Live Preview</div>
+      <div class="flex flex-wrap gap-4 items-center">
+        <button class="primary-btn">Primary Button</button>
+        <button class="secondary-btn">Secondary Button</button>
+        <a href="#" class="primary-btn">Primary &lt;a&gt;</a>
+        <a href="#" class="secondary-btn">Secondary &lt;a&gt;</a>
+      </div>
+    </div>
+    <div class="ref-code-block">
+      <pre><span class="token-sel">.primary-btn</span> {
+  <span class="token-prop">background</span>: <span class="token-var">var(--clr-primary)</span>;
+  <span class="token-prop">color</span>: <span class="token-val">white</span>;
+  <span class="token-prop">border-radius</span>: <span class="token-val">20px</span>;
+  <span class="token-prop">padding</span>: <span class="token-val">1rem 0.75rem</span>;
+  <span class="token-prop">font-family</span>: <span class="token-var">var(--ff-header)</span>;
+  <span class="token-prop">font-size</span>: <span class="token-val">1rem</span>;
+  <span class="token-prop">box-shadow</span>: <span class="token-val">9px 4.5px 5.5px -6px #000</span>;
+}
+<span class="token-sel">.primary-btn:hover</span> { <span class="token-prop">background-color</span>: <span class="token-var">var(--clr-secondary)</span>; }
+
+<span class="token-sel">.secondary-btn</span> {
+  <span class="token-prop">background</span>: <span class="token-var">var(--clr-secondary)</span>;
+  <span class="token-com">/* ...same structure as primary-btn */</span>
+}
+<span class="token-sel">.secondary-btn:hover</span> { <span class="token-prop">background-color</span>: <span class="token-var">var(--clr-primary)</span>; }</pre>
+    </div>
+    <div class="ref-code-block" style="margin-top:0.75rem;">
+      <pre><span class="token-com">&lt;!-- HTML Skeleton --&gt;</span>
+&lt;<span class="token-sel">button</span> class="primary-btn"&gt;Label&lt;/button&gt;
+&lt;<span class="token-sel">button</span> class="secondary-btn"&gt;Label&lt;/button&gt;
+
+<span class="token-com">&lt;!-- As a link --&gt;</span>
+&lt;<span class="token-sel">a</span> href="#" class="primary-btn"&gt;Label&lt;/a&gt;</pre>
+    </div>
+  </section>
+
+  <!-- ====================== ACCORDION ====================== -->
+  <section class="ref-section" id="accordion">
+    <div class="ref-section-title">Accordion — .details-wrapper</div>
+    <div class="component-demo">
+      <div class="component-label">Live Preview</div>
+      <div class="details-wrapper block-650">
+        <div class="detail-title-section">
+          <h3>FAQ Section</h3>
+        </div>
+        <details>
+          <summary>What is this accordion for?</summary>
+          <p style="padding:0.75rem 1rem 0; color:var(--clr-secondary);">It opens and reveals content when clicked. Uses native HTML details/summary — no JS needed.</p>
+        </details>
+        <details>
+          <summary>How does the open state look?</summary>
+          <p style="padding:0.75rem 1rem 0; color:var(--clr-secondary);">The background switches to an oklch orange tint using <code>details[open]</code>.</p>
+        </details>
+      </div>
+    </div>
+    <div class="ref-code-block">
+      <pre><span class="token-sel">.details-wrapper</span> {
+  <span class="token-prop">background</span>: <span class="token-val">#ffffff</span>;
+  <span class="token-prop">border-radius</span>: <span class="token-val">16px</span>;
+  <span class="token-prop">padding</span>: <span class="token-val">1rem</span>;
+}
+<span class="token-sel">.detail-title-section</span> {
+  <span class="token-prop">background</span>: <span class="token-var">var(--clr-secondary)</span>;
+  <span class="token-prop">border-radius</span>: <span class="token-val">8px</span>;
+  <span class="token-prop">padding</span>: <span class="token-val">1rem</span>;
+}
+<span class="token-sel">details[open]</span> {
+  <span class="token-prop">background</span>: <span class="token-val">oklch(95% 0.1812 38.35)</span>;
+}</pre>
+    </div>
+    <div class="ref-code-block" style="margin-top:0.75rem;">
+      <pre><span class="token-com">&lt;!-- HTML Skeleton --&gt;</span>
+&lt;<span class="token-sel">div</span> class="details-wrapper"&gt;
+  &lt;<span class="token-sel">div</span> class="detail-title-section"&gt;
+    &lt;<span class="token-sel">h3</span>&gt;Section Title&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;<span class="token-sel">details</span>&gt;
+    &lt;<span class="token-sel">summary</span>&gt;Question / Label&lt;/summary&gt;
+    &lt;<span class="token-sel">p</span>&gt;Answer content here.&lt;/p&gt;
+  &lt;/details&gt;
+&lt;/div&gt;</pre>
+    </div>
+  </section>
+
+  <!-- ====================== FORMS ====================== -->
+  <section class="ref-section" id="forms">
+    <div class="ref-section-title">Form — form.form-wrapper</div>
+    <div class="component-demo">
+      <div class="component-label">Live Preview</div>
+      <form class="form-wrapper" onsubmit="return false;">
+        <div class="form-demo">
+          <label for="demo-name">Full Name</label>
+          <input type="text" id="demo-name" placeholder="John Doe" />
+          <label for="demo-email">Email Address</label>
+          <input type="email" id="demo-email" placeholder="john@example.com" />
+          <label for="demo-msg">Message</label>
+          <textarea id="demo-msg" rows="3" placeholder="Your message..."></textarea>
+          <button class="primary-btn" type="submit">Send Message</button>
+        </div>
+      </form>
+    </div>
+    <div class="ref-code-block">
+      <pre><span class="token-sel">form.form-wrapper</span> {
+  <span class="token-prop">max-width</span>: <span class="token-val">650px</span>;
+  <span class="token-prop">padding</span>: <span class="token-val">1rem</span>;
+}</pre>
+    </div>
+    <div class="ref-code-block" style="margin-top:0.75rem;">
+      <pre><span class="token-com">&lt;!-- HTML Skeleton --&gt;</span>
+&lt;<span class="token-sel">form</span> class="form-wrapper" action="#" method="POST"&gt;
+  &lt;<span class="token-sel">label</span> for="name"&gt;Name&lt;/label&gt;
+  &lt;<span class="token-sel">input</span> type="text" id="name" name="name" /&gt;
+
+  &lt;<span class="token-sel">label</span> for="email"&gt;Email&lt;/label&gt;
+  &lt;<span class="token-sel">input</span> type="email" id="email" name="email" /&gt;
+
+  &lt;<span class="token-sel">label</span> for="msg"&gt;Message&lt;/label&gt;
+  &lt;<span class="token-sel">textarea</span> id="msg" name="msg" rows="4"&gt;&lt;/textarea&gt;
+
+  &lt;<span class="token-sel">button</span> class="primary-btn" type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</pre>
+    </div>
+  </section>
+
+  <!-- ====================== MISC ====================== -->
+  <section class="ref-section" id="misc">
+    <div class="ref-section-title">Misc Helpers</div>
+    <table class="util-table">
+      <thead><tr><th>Class / Element</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr><td>.img-border-rounded</td><td>border-radius: 16px on &lt;img&gt;</td></tr>
+        <tr><td>hr</td><td>33% width, 0.25rem solid primary color</td></tr>
+        <tr><td>a</td><td>text-decoration: none (global reset)</td></tr>
+        <tr><td>section</td><td>margin: 0 auto; padding: 2rem 1rem</td></tr>
+        <tr><td>interpolate-size: allow-keywords</td><td>Set on html/body for smooth height transitions</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:1.5rem;" class="component-demo">
+      <div class="component-label">hr Example</div>
+      <p class="tc-sec">Section intro text above the divider line.</p>
+      <hr />
+    </div>
+  </section>
+
+  <!-- ====================== FULL PAGE SKELETON ====================== -->
+  <section class="ref-section">
+    <div class="ref-section-title">Full Page HTML Skeleton <span class="tag">Copy-Paste</span></div>
+    <div class="ref-code-block">
+      <pre>&lt;!DOCTYPE html&gt;
+&lt;<span class="token-sel">html</span> lang="en"&gt;
+&lt;<span class="token-sel">head</span>&gt;
+  &lt;<span class="token-sel">meta</span> charset="UTF-8" /&gt;
+  &lt;<span class="token-sel">meta</span> name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;<span class="token-sel">title</span>&gt;Page Title&lt;/title&gt;
+  &lt;<span class="token-sel">link</span> rel="preconnect" href="https://fonts.googleapis.com" /&gt;
+  &lt;<span class="token-sel">link</span> rel="preconnect" href="https://fonts.gstatic.com" crossorigin /&gt;
+  &lt;<span class="token-sel">link</span> href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900
+        &amp;family=Unbounded:wght@200..900&amp;display=swap" rel="stylesheet" /&gt;
+  &lt;<span class="token-sel">link</span> rel="stylesheet" href="style.css" /&gt;
+&lt;/head&gt;
+&lt;<span class="token-sel">body</span>&gt;
+
+  <span class="token-com">&lt;!-- NAVIGATION --&gt;</span>
+  &lt;<span class="token-sel">header</span>&gt;
+    &lt;<span class="token-sel">nav</span> class="menu container"&gt;
+      &lt;<span class="token-sel">ul</span> class="flex items-center gap-4"&gt;
+        &lt;<span class="token-sel">li</span>&gt;&lt;<span class="token-sel">a</span> href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;<span class="token-sel">li</span>&gt;&lt;<span class="token-sel">a</span> href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+        &lt;<span class="token-sel">li</span>&gt;&lt;<span class="token-sel">a</span> href="#"&gt;Work&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  <span class="token-com">&lt;!-- HERO --&gt;</span>
+  &lt;<span class="token-sel">section</span> class="container wrapper"&gt;
+    &lt;<span class="token-sel">div</span> class="text-wrapper center"&gt;
+      &lt;<span class="token-sel">h1</span> class="fs-xlarge fw-vbold tc-sec"&gt;Hero Heading&lt;/h1&gt;
+      &lt;<span class="token-sel">hr</span> /&gt;
+      &lt;<span class="token-sel">p</span>&gt;Subheading or short description copy here.&lt;/p&gt;
+      &lt;<span class="token-sel">div</span> class="flex justify-center gap-4 mt-2"&gt;
+        &lt;<span class="token-sel">button</span> class="primary-btn"&gt;Get Started&lt;/button&gt;
+        &lt;<span class="token-sel">button</span> class="secondary-btn"&gt;Learn More&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  <span class="token-com">&lt;!-- CARD GRID --&gt;</span>
+  &lt;<span class="token-sel">section</span> class="container bg-accent"&gt;
+    &lt;<span class="token-sel">h2</span> class="fs-large fw-bold tc-sec center"&gt;Section Title&lt;/h2&gt;
+    &lt;<span class="token-sel">div</span> class="flex flex-wrap justify-center gap-6 mt-2"&gt;
+      &lt;<span class="token-sel">div</span> class="card-item"&gt;
+        &lt;<span class="token-sel">div</span> class="card-title"&gt;Card One&lt;/div&gt;
+        &lt;<span class="token-sel">div</span> class="card-text"&gt;Short description here.&lt;/div&gt;
+        &lt;<span class="token-sel">button</span> class="primary-btn"&gt;CTA&lt;/button&gt;
+      &lt;/div&gt;
+      <span class="token-com">&lt;!-- repeat .card-item as needed --&gt;</span>
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  <span class="token-com">&lt;!-- ACCORDION --&gt;</span>
+  &lt;<span class="token-sel">section</span> class="container"&gt;
+    &lt;<span class="token-sel">div</span> class="details-wrapper block-650 mx-0"&gt;
+      &lt;<span class="token-sel">div</span> class="detail-title-section"&gt;
+        &lt;<span class="token-sel">h3</span>&gt;FAQ&lt;/h3&gt;
+      &lt;/div&gt;
+      &lt;<span class="token-sel">details</span>&gt;
+        &lt;<span class="token-sel">summary</span>&gt;Question here?&lt;/summary&gt;
+        &lt;<span class="token-sel">p</span>&gt;Answer here.&lt;/p&gt;
+      &lt;/details&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  <span class="token-com">&lt;!-- CONTACT FORM --&gt;</span>
+  &lt;<span class="token-sel">section</span> class="container bg-secondary"&gt;
+    &lt;<span class="token-sel">form</span> class="form-wrapper mx-0"&gt;
+      &lt;<span class="token-sel">label</span> for="name"&gt;Name&lt;/label&gt;
+      &lt;<span class="token-sel">input</span> type="text" id="name" /&gt;
+      &lt;<span class="token-sel">label</span> for="email"&gt;Email&lt;/label&gt;
+      &lt;<span class="token-sel">input</span> type="email" id="email" /&gt;
+      &lt;<span class="token-sel">button</span> class="primary-btn" type="submit"&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/section&gt;
+
+  <span class="token-com">&lt;!-- FOOTER --&gt;</span>
+  &lt;<span class="token-sel">footer</span> class="bg-secondary"&gt;
+    &lt;<span class="token-sel">div</span> class="container flex justify-between items-center"&gt;
+      &lt;<span class="token-sel">p</span> class="tc-white"&gt;© 2026 Your Name&lt;/p&gt;
+      &lt;<span class="token-sel">nav</span> class="menu"&gt;
+        &lt;<span class="token-sel">ul</span> class="flex gap-4"&gt;
+          &lt;<span class="token-sel">li</span>&gt;&lt;<span class="token-sel">a</span> href="#" class="tc-white"&gt;Privacy&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    </div>
+  </section>
+
+</div>
+
+<a href="#top" class="back-to-top" title="Back to top">↑</a>
+
+</body>
+</html>
